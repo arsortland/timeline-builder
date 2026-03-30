@@ -59,6 +59,8 @@ export const posts: BlogPost[] = [
 
       "Walk through the report section by section. The Identity section typically surfaces the most findings — missing Conditional Access policies, legacy authentication still enabled, privileged roles without PIM, weak MFA configurations. The Devices section highlights gaps in Intune compliance policies and device-based access controls. Network and Data sections cover Exchange, SharePoint, and Azure infrastructure hardening.",
 
+      "img:/ztademo.webp|Source: github.com/microsoft/zerotrustassessment",
+
       "### Turning findings into actionable tasks",
 
       "Each failed check in the report maps to a specific configuration change. The approach is straightforward: extract every failed and warning item, categorize them by risk level, and build a prioritized remediation backlog. High-risk items come first — these are the changes that reduce the most risk with the highest urgency.",
@@ -78,6 +80,10 @@ export const posts: BlogPost[] = [
       "Present both reports to leadership and the security team. The before-and-after comparison is powerful: it turns abstract security work into a visible, measurable outcome. The value is demonstrated not through slides or opinions, but through documented, repeatable assessment results that show the gap closing over time.",
 
       "Schedule recurring assessments (monthly or quarterly) to catch configuration drift. Tenants are living environments — new users, new applications, policy changes, and admin turnover can all introduce regressions. Regular reassessment ensures your Zero Trust posture is maintained, not just achieved once and forgotten.",
+
+      "If you want to see how the assessment report looks and feels, there is a [live demo](https://microsoft.github.io/zerotrustassessment/demo/) worth checking out.",
+
+      "_ By André Sortland, Senior Consultant, Atea.",
     ],
     image: "/ZTAblog.png",
     date: "March 30, 2026",

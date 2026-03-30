@@ -1,21 +1,47 @@
 // Created: 2026-03-30
-// Version: v1.1 - Added expandable full article view with heading support
+// Version: v1.2 - Added image content support (img: prefix) with click-to-expand modal
 // Description: Learn (blog) page for Team Entra Norway portal
 // Purpose: Displays blog posts in a single-column card layout. Each card shows
 //          an image, title, date, read time, and description excerpt.
 //          Clicking "Read more" expands the card to show the full article.
 //          Paragraphs starting with ## are rendered as section headings.
 //          Paragraphs starting with ### are rendered as sub-headings.
+//          Paragraphs starting with _ are rendered in italic with extra top spacing.
+//          Paragraphs starting with img: render an image thumbnail with caption. Format: img:/path|caption
 
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
-import { BookOpen, Calendar, Clock, ArrowLeft } from "lucide-react";
+import { BookOpen, Calendar, Clock, ArrowLeft, X } from "lucide-react";
 import { posts } from "../lib/learnData";
 
 export default function LearnPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+
+  /** Render text with inline [label](url) markdown links */
+  function renderInlineLinks(text: string) {
+    const parts = text.split(/(\[.*?\]\(.*?\))/);
+    return parts.map((part, idx) => {
+      const match = part.match(/^\[(.+?)\]\((.+?)\)$/);
+      if (match) {
+        return (
+          <a
+            key={idx}
+            href={match[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--accent)" }}
+            className="underline hover:opacity-80"
+          >
+            {match[1]}
+          </a>
+        );
+      }
+      return part;
+    });
+  }
 
   const expandedPost = expandedId
     ? posts.find((p) => p.id === expandedId)
@@ -76,6 +102,7 @@ export default function LearnPage() {
 
         {/* Full article view */}
         {expandedPost ? (
+          <>
           <article className="mt-6">
             {/* Meta */}
             <div
@@ -131,13 +158,53 @@ export default function LearnPage() {
                     </h3>
                   );
                 }
+                if (paragraph.startsWith("_ ")) {
+                  return (
+                    <p
+                      key={i}
+                      className="text-sm leading-relaxed italic mt-8"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {paragraph.slice(2)}
+                    </p>
+                  );
+                }
+                if (paragraph.startsWith("img:")) {
+                  const parts = paragraph.slice(4).split("|");
+                  const src = parts[0];
+                  const caption = parts[1] || "";
+                  return (
+                    <figure key={i} className="mt-4 mb-2">
+                      <div
+                        className="relative w-full max-w-md rounded-lg overflow-hidden cursor-pointer transition-opacity hover:opacity-90"
+                        style={{ aspectRatio: "16/9" }}
+                        onClick={() => setLightboxSrc(src)}
+                      >
+                        <Image
+                          src={src}
+                          alt={caption}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      {caption && (
+                        <figcaption
+                          className="text-xs mt-2 italic"
+                          style={{ color: "var(--text-muted)" }}
+                        >
+                          {caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  );
+                }
                 return (
                   <p
                     key={i}
                     className="text-sm leading-relaxed"
                     style={{ color: "var(--text-secondary)" }}
                   >
-                    {paragraph}
+                    {renderInlineLinks(paragraph)}
                   </p>
                 );
               })}
@@ -153,6 +220,33 @@ export default function LearnPage() {
               Back to all posts
             </button>
           </article>
+
+          {/* Lightbox modal */}
+          {lightboxSrc && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              style={{ background: "var(--modal-overlay)" }}
+              onClick={() => setLightboxSrc(null)}
+            >
+              <button
+                className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+                style={{ background: "var(--surface)", color: "var(--text-primary)" }}
+                onClick={() => setLightboxSrc(null)}
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center">
+                <Image
+                  src={lightboxSrc}
+                  alt="Full size image"
+                  width={1920}
+                  height={1080}
+                  className="max-w-full max-h-[90vh] rounded-lg object-contain"
+                />
+              </div>
+            </div>
+          )}
+          </>
         ) : (
           /* Card listing */
           <div className="flex flex-col gap-6">
