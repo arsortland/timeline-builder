@@ -1,13 +1,15 @@
 // Created: 2026-02-20
-// Updated: 2026-03-26
-// Version: v3.0
-// Description: Root layout with metadata, fonts, and theme provider
-// Purpose: Wraps the application in ThemeProvider for dark/light mode support
+// Updated: 2026-03-30
+// Version: v4.0
+// Description: Root layout with metadata, fonts, theme provider, and portal shell
+// Purpose: Wraps the application in ThemeProvider and PortalShell for shared sidebar layout
+//          v4.0: Added PortalShell wrapper, updated metadata for Team Entra Norway
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./lib/themeContext";
+import PortalShell from "./components/PortalShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,15 +22,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Timeline Builder - Create & Share Project Timelines",
+  title: "Team Entra Norway",
   description:
-    "Create beautiful interactive timelines for your projects. Add milestones, customize positions, and share with colleagues or export as images for documents.",
+    "Internal portal for Team Entra Norway — tools, timelines, and resources for Entra ID and Microsoft cloud administration.",
   keywords: [
+    "entra",
+    "azure",
+    "identity",
+    "microsoft 365",
+    "tools",
     "timeline",
-    "project planning",
-    "milestones",
-    "gantt",
-    "project management",
   ],
 };
 
@@ -49,7 +52,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <PortalShell>{children}</PortalShell>
+        </ThemeProvider>
       </body>
     </html>
   );

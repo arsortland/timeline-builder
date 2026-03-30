@@ -1,10 +1,11 @@
 // Created: 2026-02-20
-// Updated: 2026-03-26
-// Version: v4.0
-// Description: TypeScript interfaces and types for Timeline Builder application
-// Purpose: Define data structures for milestones, timeline data, and component props
+// Updated: 2026-03-30
+// Version: v5.0
+// Description: TypeScript interfaces and types for Team Entra Norway portal
+// Purpose: Define data structures for milestones, timeline data, component props, and tools
 //          v3.0: Added SidebarProps and TopBarProps for new layout
 //          v4.0: Added icon, number, title to Milestone; added TimelineStyle type
+//          v5.0: Added Tool/ToolLink interfaces; simplified TopBarProps (removed sidebar toggle)
 
 export type TimelineStyle = "classic" | "project";
 
@@ -52,8 +53,6 @@ export interface TopBarProps {
   onShareLink: () => void;
   onClear: () => void;
   lastSaved?: string;
-  onToggleSidebar: () => void;
-  sidebarCollapsed: boolean;
 }
 
 export interface SidebarProps {
@@ -84,4 +83,21 @@ export interface ExportOptions {
   format: "png" | "jpg";
   quality: number;
   backgroundColor: string;
+}
+
+// Toolbox types
+export interface ToolLink {
+  label: string;
+  url: string;
+}
+
+export interface Tool {
+  id: string;
+  name: string;
+  description: string;
+  tags: string[];
+  detailedDescription: string;
+  quickGuide?: string;
+  bestFor?: string[];
+  links: ToolLink[];
 }

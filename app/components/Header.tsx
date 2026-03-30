@@ -1,13 +1,13 @@
 // Created: 2026-02-20
-// Updated: 2026-03-26
-// Version: v3.0
-// Description: TopBar component for the main content area
-// Purpose: Displays project name input, action buttons, last-saved indicator,
-//          and a mobile hamburger toggle for the sidebar. Theme-aware styling.
+// Updated: 2026-03-30
+// Version: v4.0
+// Description: TopBar component for the timeline page
+// Purpose: Displays project name input, action buttons, and last-saved indicator.
+//          v4.0: Removed sidebar toggle props and mobile hamburger (PortalShell handles it).
 
 "use client";
 
-import { Download, Share2, Trash2, Save, Menu } from "lucide-react";
+import { Download, Share2, Trash2, Save } from "lucide-react";
 import { TopBarProps } from "../lib/types";
 import { formatRelativeTime } from "../lib/timelineUtils";
 
@@ -18,8 +18,6 @@ export default function TopBar({
   onShareLink,
   onClear,
   lastSaved,
-  onToggleSidebar,
-  sidebarCollapsed,
 }: TopBarProps) {
   return (
     <header
@@ -30,24 +28,8 @@ export default function TopBar({
       }}
     >
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-        {/* Left: hamburger (mobile) + project name */}
+        {/* Left: project name */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          {/* Mobile sidebar toggle */}
-          <button
-            onClick={onToggleSidebar}
-            className="md:hidden p-2 rounded-lg transition-colors"
-            style={{ color: "var(--text-secondary)" }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--surface-hover)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "transparent")
-            }
-            title="Toggle sidebar"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-
           <div className="flex-1 min-w-0">
             <input
               type="text"

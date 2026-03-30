@@ -1,16 +1,19 @@
 // Created: 2026-03-26
-// Version: v2.0
+// Updated: 2026-03-30
+// Version: v3.0
 // Description: Sidebar navigation component with theme toggle
-// Purpose: Collapsible sidebar with branding, navigation items (Timeline active,
-//          placeholders greyed out), and a dark/light mode toggle at the bottom.
+// Purpose: Collapsible sidebar with branding, route-based navigation (Home, Timeline, Toolbox),
+//          and a dark/light mode toggle at the bottom.
+//          v3.0: Replaced hardcoded navItems with Next.js Link + usePathname for active state.
 
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  Calendar,
+  Home,
   Clock,
-  Settings,
+  Wrench,
   Sun,
   Moon,
   ChevronsLeft,
@@ -21,40 +24,19 @@ import { useTheme } from "../lib/themeContext";
 
 interface NavItem {
   label: string;
+  href: string;
   icon: React.ReactNode;
-  active: boolean;
-  disabled: boolean;
 }
 
 const navItems: NavItem[] = [
-  {
-    label: "Dashboard",
-    icon: <LayoutDashboard className="w-5 h-5" />,
-    active: false,
-    disabled: true,
-  },
-  {
-    label: "Calendar",
-    icon: <Calendar className="w-5 h-5" />,
-    active: false,
-    disabled: true,
-  },
-  {
-    label: "Timeline",
-    icon: <Clock className="w-5 h-5" />,
-    active: true,
-    disabled: false,
-  },
-  {
-    label: "Settings",
-    icon: <Settings className="w-5 h-5" />,
-    active: false,
-    disabled: true,
-  },
+  { label: "Home", href: "/", icon: <Home className="w-5 h-5" /> },
+  { label: "Timeline", href: "/timeline", icon: <Clock className="w-5 h-5" /> },
+  { label: "Toolbox", href: "/toolbox", icon: <Wrench className="w-5 h-5" /> },
 ];
 
 export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
 
   return (
     <aside
@@ -87,7 +69,7 @@ export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
                 Team Entra
               </p>
               <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                Timeline Builder
+                Norway
               </p>
             </div>
           </div>
@@ -120,39 +102,42 @@ export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            disabled={item.disabled}
-            className="w-full flex items-center gap-3 rounded-lg transition-colors"
-            style={{
-              padding: collapsed ? "10px 0" : "10px 12px",
-              justifyContent: collapsed ? "center" : "flex-start",
-              background: item.active ? "var(--sidebar-active)" : "transparent",
-              color: item.active
-                ? "var(--sidebar-active-text)"
-                : item.disabled
-                  ? "var(--text-muted)"
+        {navItems.map((item) => {
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="w-full flex items-center gap-3 rounded-lg transition-colors"
+              style={{
+                padding: collapsed ? "10px 0" : "10px 12px",
+                justifyContent: collapsed ? "center" : "flex-start",
+                background: isActive ? "var(--sidebar-active)" : "transparent",
+                color: isActive
+                  ? "var(--sidebar-active-text)"
                   : "var(--text-secondary)",
-              cursor: item.disabled ? "default" : "pointer",
-              opacity: item.disabled ? 0.5 : 1,
-            }}
-            onMouseEnter={(e) => {
-              if (!item.disabled && !item.active)
-                e.currentTarget.style.background = "var(--sidebar-hover)";
-            }}
-            onMouseLeave={(e) => {
-              if (!item.active)
-                e.currentTarget.style.background = "transparent";
-            }}
-            title={collapsed ? item.label : undefined}
-          >
-            {item.icon}
-            {!collapsed && (
-              <span className="text-sm font-medium truncate">{item.label}</span>
-            )}
-          </button>
-        ))}
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive)
+                  e.currentTarget.style.background = "var(--sidebar-hover)";
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) e.currentTarget.style.background = "transparent";
+              }}
+              title={collapsed ? item.label : undefined}
+            >
+              {item.icon}
+              {!collapsed && (
+                <span className="text-sm font-medium truncate">
+                  {item.label}
+                </span>
+              )}
+            </Link>
+          );
+        })}
       </nav>
 
       {/* Bottom section: theme toggle + expand button */}
