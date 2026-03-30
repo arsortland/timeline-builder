@@ -238,7 +238,7 @@ export default function TimelinePage() {
             </label>
             <input
               type="color"
-              value={timelineColor || "#d97706"}
+              value={timelineColor || "#eab308"}
               onChange={(e) => handleTimelineColorChange(e.target.value)}
               className="w-9 h-9 rounded cursor-pointer"
               style={{ border: "1px solid var(--border)" }}

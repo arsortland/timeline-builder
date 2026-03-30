@@ -1,11 +1,12 @@
 // Created: 2026-03-26
 // Updated: 2026-03-30
-// Version: v4.0
+// Version: v5.0
 // Description: Sidebar navigation component with theme toggle
-// Purpose: Collapsible sidebar with branding, route-based navigation (Home, Timeline, Toolbox),
+// Purpose: Collapsible sidebar with branding, route-based navigation (Home, Timeline, Toolbox, Learn),
 //          and a dark/light mode toggle at the bottom.
 //          v3.0: Replaced hardcoded navItems with Next.js Link + usePathname for active state.
 //          v4.0: Replaced TE text branding with custom team logo (teamentralogoNOBG.png).
+//          v5.0: Added Learn page navigation item with BookOpen icon.
 
 "use client";
 
@@ -16,6 +17,7 @@ import {
   Home,
   Clock,
   Wrench,
+  BookOpen,
   Sun,
   Moon,
   ChevronsLeft,
@@ -34,6 +36,7 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/", icon: <Home className="w-5 h-5" /> },
   { label: "Timeline", href: "/timeline", icon: <Clock className="w-5 h-5" /> },
   { label: "Toolbox", href: "/toolbox", icon: <Wrench className="w-5 h-5" /> },
+  { label: "Learn", href: "/learn", icon: <BookOpen className="w-5 h-5" /> },
 ];
 
 export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {

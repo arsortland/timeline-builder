@@ -356,7 +356,7 @@ export default function DataTable({
                   <td className="px-4 py-3">
                     <input
                       type="color"
-                      value={milestone.color || "#d97706"}
+                      value={milestone.color || "#eab308"}
                       onChange={(e) =>
                         handleUpdate(milestone.id, "color", e.target.value)
                       }
