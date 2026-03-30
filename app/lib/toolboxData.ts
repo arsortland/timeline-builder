@@ -1,6 +1,6 @@
 // Created: 2026-03-30
 // Updated: 2026-03-30
-// Version: v1.2 - Added sourceType classification to all tools
+// Version: v1.3 - Added idPowerToys (CA Documenter + Entra Mind Map) as tool #15
 // Description: Tool definitions for the Toolbox page
 // Purpose: Provides an array of tools used by the Entra / Microsoft cloud team,
 //          each with name, sourceType, description, tags, detailed description, and links.
@@ -392,6 +392,49 @@ export const tools: Tool[] = [
       {
         label: "MS Graph Permissions",
         url: "https://aztier.com/#msgraph",
+      },
+    ],
+  },
+  {
+    id: "idpowertoys",
+    name: "idPowerToys",
+    sourceType: "opensource",
+    description:
+      "Export Conditional Access policies to PowerPoint and explore Microsoft Entra products through an interactive mind map.",
+    tags: [
+      "Conditional Access",
+      "Documentation",
+      "Entra ID",
+      "Web Tool",
+      "PowerPoint",
+      "Visualization",
+    ],
+    detailedDescription:
+      "idPowerToys is a community-built collection of mini-apps for Microsoft Entra created by Merill Fernando (Microsoft employee and well-known identity community contributor). The flagship tool — CA Documenter — lets you export all your Conditional Access policies into a clean PowerPoint presentation, giving you a bird's-eye view of your security posture. It supports both automatic generation (sign in and policies are fetched directly) and manual generation (paste JSON). This makes it invaluable for policy reviews, audit preparation, and sharing CA configurations with security stakeholders who lack admin access. The suite also includes the Microsoft Entra Mind Map, an interactive visual guide that maps out every Microsoft Entra product and capability, useful for understanding the full Entra ecosystem at a glance.",
+    quickGuide:
+      "Navigate to idpowertoys.merill.net/ca to open CA Documenter. Choose Automatic Generation and sign in with your Entra ID account — your Conditional Access policies will be fetched and exported to a downloadable PowerPoint file. Alternatively, use Manual Generation to paste a JSON export of your policies. For the Entra Mind Map, visit idpowertoys.merill.net/mindmap to explore an interactive visual overview of all Microsoft Entra products and features.",
+    bestFor: [
+      "Exporting Conditional Access policies to PowerPoint for review or audit documentation",
+      "Sharing CA policy configurations with security stakeholders who lack admin access",
+      "Quickly generating a visual overview of your tenant's Conditional Access posture",
+      "Exploring the full Microsoft Entra product landscape via the interactive mind map",
+    ],
+    links: [
+      {
+        label: "idPowerToys",
+        url: "https://idpowertoys.merill.net/",
+      },
+      {
+        label: "CA Documenter",
+        url: "https://idpowertoys.merill.net/ca",
+      },
+      {
+        label: "Entra Mind Map",
+        url: "https://idpowertoys.merill.net/mindmap",
+      },
+      {
+        label: "GitHub",
+        url: "https://github.com/merill/idPowerToys",
       },
     ],
   },

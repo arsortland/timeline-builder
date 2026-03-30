@@ -1,6 +1,6 @@
 # Team Entra Norway Portal
 
-Internal portal for the Identity & Access Management team at Atea Norway. Built with Next.js, TypeScript, and Tailwind CSS.
+Internal portal for an Identity & Access Management team working with Microsoft Entra. Built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Overview
 

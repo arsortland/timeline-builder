@@ -1,6 +1,6 @@
 // Created: 2026-02-20
 // Updated: 2026-06-24
-// Version: v7.0
+// Version: v9.0 - Removed all Atea references from hero text
 // Description: Team Entra Norway - Portal frontpage with parallax floating shapes
 // Purpose: Landing page with full-viewport hero, floating geometric shapes that drift
 //          at different scroll speeds, stats highlight bar, quick-access cards,
@@ -209,15 +209,6 @@ export default function Home() {
 
       {/* ── Hero section (full viewport) ── */}
       <section className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-6 lg:px-8 py-16">
-        <Image
-          src="/Atea logo.png"
-          alt="Atea logo"
-          width={120}
-          height={40}
-          unoptimized
-          priority
-          className="mb-4"
-        />
         <div className="mb-6">
           <Image
             src="/teamentralogoNOBG.png"
@@ -247,10 +238,9 @@ export default function Home() {
           className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          We are the Identity &amp; Access Management team responsible for
-          Microsoft Entra ID, Azure security, and Microsoft 365 governance in
-          Atea Norway. This portal is our shared hub for tools, project
-          timelines, and reference material.
+          This site is an informal knowledge collection maintained by
+          consultants working with Microsoft Entra. It serves as a shared hub
+          for tools, project timelines, and reference material.
         </p>
 
         {/* Scroll indicator */}
