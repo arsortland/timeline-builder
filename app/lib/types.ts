@@ -1,11 +1,12 @@
 // Created: 2026-02-20
 // Updated: 2026-03-30
-// Version: v5.0
+// Version: v6.0
 // Description: TypeScript interfaces and types for Team Entra Norway portal
 // Purpose: Define data structures for milestones, timeline data, component props, and tools
 //          v3.0: Added SidebarProps and TopBarProps for new layout
 //          v4.0: Added icon, number, title to Milestone; added TimelineStyle type
 //          v5.0: Added Tool/ToolLink interfaces; simplified TopBarProps (removed sidebar toggle)
+//          v6.0: Added ToolSourceType for source classification (microsoft/opensource/personal)
 
 export type TimelineStyle = "classic" | "project";
 
@@ -86,6 +87,8 @@ export interface ExportOptions {
 }
 
 // Toolbox types
+export type ToolSourceType = "microsoft" | "opensource" | "personal";
+
 export interface ToolLink {
   label: string;
   url: string;
@@ -94,6 +97,7 @@ export interface ToolLink {
 export interface Tool {
   id: string;
   name: string;
+  sourceType: ToolSourceType;
   description: string;
   tags: string[];
   detailedDescription: string;

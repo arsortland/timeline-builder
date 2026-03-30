@@ -2,7 +2,7 @@
 
 /* ============================================================
    globals.css — Theme variables, vis-timeline overrides, global utilities
-   Updated: 2026-03-26 | v3.0 — Dark/light theme support + sidebar layout
+   Updated: 2026-03-30 | v4.0 — Added parallax shape + scroll animation utilities
    ============================================================ */
 
 /* ---- Light theme (default CSS vars) ---- */
@@ -215,5 +215,67 @@ body {
 
   .no-print {
     display: none !important;
+  }
+}
+
+/* ============================================================
+   Parallax shapes & scroll-triggered animations
+   ============================================================ */
+
+/* Slow idle bobbing for floating shapes */
+@keyframes float-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+/* Content sections fading in from below */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll-down indicator bounce */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* Base class for parallax shapes — pointer-events none so they don't block clicks */
+.parallax-shape {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  animation: float-drift 6s ease-in-out infinite;
+}
+
+/* Scroll-triggered reveal */
+.fade-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Accessibility — respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-shape {
+    animation: none !important;
+    transform: none !important;
+  }
+  .fade-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .scroll-indicator {
+    animation: none !important;
   }
 }

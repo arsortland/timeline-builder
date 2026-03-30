@@ -1,8 +1,11 @@
 // Created: 2026-03-30
-// Version: v1.1 - Added quickGuide and bestFor fields to all tools
+// Updated: 2026-03-30
+// Version: v1.2 - Added sourceType classification to all tools
 // Description: Tool definitions for the Toolbox page
 // Purpose: Provides an array of tools used by the Entra / Microsoft cloud team,
-//          each with name, description, tags, detailed description, and links.
+//          each with name, sourceType, description, tags, detailed description, and links.
+//          v1.1: Added quickGuide and bestFor fields to all tools
+//          v1.2: Added sourceType (microsoft/opensource/personal) to all tools
 
 import { Tool } from "./types";
 
@@ -10,6 +13,7 @@ export const tools: Tool[] = [
   {
     id: "roadtools",
     name: "ROADtools",
+    sourceType: "opensource",
     description:
       "Framework for interacting with Azure AD (Entra ID) using the ROADrecon and ROADlib modules. Great for auditing and mapping tenant configurations.",
     tags: ["Entra ID", "Audit", "Reconnaissance", "Python"],
@@ -34,6 +38,7 @@ export const tools: Tool[] = [
   {
     id: "bloodhound",
     name: "BloodHound",
+    sourceType: "opensource",
     description:
       "Graph-based identity attack path analysis tool for Active Directory and Azure AD environments.",
     tags: ["Entra ID", "Active Directory", "Attack Paths", "Security"],
@@ -58,6 +63,7 @@ export const tools: Tool[] = [
   {
     id: "maester",
     name: "Maester",
+    sourceType: "opensource",
     description:
       "PowerShell-based Entra ID security configuration analyser that runs tests against best-practice benchmarks.",
     tags: ["Entra ID", "Security", "Compliance", "PowerShell"],
@@ -79,6 +85,7 @@ export const tools: Tool[] = [
   {
     id: "graph-explorer",
     name: "Graph Explorer",
+    sourceType: "microsoft",
     description:
       "Interactive web tool for building, testing, and learning Microsoft Graph API queries.",
     tags: ["Microsoft Graph", "API", "Testing", "Web Tool"],
@@ -106,6 +113,7 @@ export const tools: Tool[] = [
   {
     id: "azurehound",
     name: "AzureHound",
+    sourceType: "opensource",
     description:
       "Data collector for BloodHound that enumerates Azure and Entra ID objects and relationships.",
     tags: ["Entra ID", "Azure", "Attack Paths", "Go"],
@@ -126,6 +134,7 @@ export const tools: Tool[] = [
   {
     id: "scubagear",
     name: "ScubaGear",
+    sourceType: "opensource",
     description:
       "CISA's tool for assessing M365 tenants against Secure Cloud Business Applications (SCuBA) baselines.",
     tags: ["Microsoft 365", "Security", "Compliance", "PowerShell"],
@@ -147,6 +156,7 @@ export const tools: Tool[] = [
   {
     id: "monkey365",
     name: "Monkey365",
+    sourceType: "opensource",
     description:
       "PowerShell module for auditing Microsoft 365, Azure, and Entra ID security configurations.",
     tags: ["Azure", "Microsoft 365", "Entra ID", "Audit", "PowerShell"],
@@ -167,6 +177,7 @@ export const tools: Tool[] = [
   {
     id: "entra-admin-center",
     name: "Entra Admin Center",
+    sourceType: "microsoft",
     description:
       "Microsoft's portal for managing Entra ID identities, access policies, and governance.",
     tags: ["Entra ID", "Portal", "Administration", "Microsoft"],
@@ -191,9 +202,10 @@ export const tools: Tool[] = [
   {
     id: "azure-resource-graph",
     name: "Azure Resource Graph Explorer",
+    sourceType: "microsoft",
     description:
       "Query engine for exploring and analysing Azure resources at scale using Kusto Query Language.",
-    tags: ["Azure", "KQL", "Governance", "Web Tool"],
+    tags: ["Azure", "KQL", "Governance", "Web Tool", "Microsoft Graph"],
     detailedDescription:
       "Azure Resource Graph Explorer lets you write Kusto Query Language (KQL) queries to search, filter, and aggregate Azure resource data across multiple subscriptions instantly. It is invaluable for inventory, compliance checks, cost analysis, and troubleshooting. Results can be pinned to dashboards or exported to CSV.",
     quickGuide:
@@ -218,6 +230,7 @@ export const tools: Tool[] = [
   {
     id: "aadinternals",
     name: "AADInternals",
+    sourceType: "opensource",
     description:
       "Comprehensive PowerShell toolkit for Azure AD and Microsoft 365 administration and security research.",
     tags: ["Entra ID", "Microsoft 365", "Security", "PowerShell"],
@@ -239,6 +252,7 @@ export const tools: Tool[] = [
   {
     id: "zero-trust-assessment",
     name: "Zero Trust Assessment",
+    sourceType: "microsoft",
     description:
       "Microsoft's open-source PowerShell module that evaluates your tenant configuration against Zero Trust and Secure Future Initiative baselines.",
     tags: ["Entra ID", "Intune", "Security", "Compliance", "PowerShell"],
@@ -264,6 +278,120 @@ export const tools: Tool[] = [
       {
         label: "Interactive Demo",
         url: "https://aka.ms/zerotrust/demo",
+      },
+    ],
+  },
+  {
+    id: "m365-maps",
+    name: "M365 Maps",
+    sourceType: "personal",
+    description:
+      "Interactive Microsoft 365 licensing diagrams and feature matrix by Aaron Dinnage, showing what's included in every M365 license.",
+    tags: ["Microsoft 365", "Licensing", "Reference", "Comparison"],
+    detailedDescription:
+      "M365 Maps is the go-to community resource for understanding Microsoft 365 licensing. Created by Aaron Dinnage, it provides detailed visual diagrams for every M365 license (Enterprise, Business, Frontline, Education) and add-ons like EMS, Entra, Intune, Defender, Purview, and Copilot. The interactive feature matrix lets you compare features across all license tiers side-by-side, with clear indicators for included (✔), add-on (+), separate purchase (Δ), and package-only (⊡) features. Additional tools include a tenant storage calculator, product name change tracker, feature maps, and a compare/diff view for diagrams.",
+    quickGuide:
+      "Visit m365maps.com and select a license family (e.g. Microsoft 365 Enterprise E5) to see its full feature diagram. Use the Feature Matrix to compare features across all license tiers at once — toggle columns on/off to focus on the plans you care about. Use the Compare Diagrams tool to diff two licenses side-by-side. The Downloads page provides PDF/PNG exports for offline reference or presentations.",
+    bestFor: [
+      "Quickly checking which features are included in a specific M365 license",
+      "Comparing license tiers side-by-side to justify upgrades or right-size subscriptions",
+      "Preparing licensing overview slides for management or customer presentations",
+      "Understanding the full scope of Entra, Intune, Defender, and Purview across license bundles",
+    ],
+    links: [
+      {
+        label: "M365 Maps Home",
+        url: "https://m365maps.com/",
+      },
+      {
+        label: "Feature Matrix",
+        url: "https://m365maps.com/matrix.htm",
+      },
+      {
+        label: "Compare Diagrams",
+        url: "https://m365maps.com/compare.htm",
+      },
+      {
+        label: "Downloads",
+        url: "https://m365maps.com/downloads.htm",
+      },
+    ],
+  },
+  {
+    id: "entra-ca-insight",
+    name: "Entra CA Insight",
+    sourceType: "personal",
+    description:
+      "Proactively discover gaps in Entra Conditional Access policies before attackers do, by evaluating every possible access combination offline.",
+    tags: [
+      "Entra ID",
+      "Conditional Access",
+      "Security",
+      "Python",
+      "Gap Analysis",
+    ],
+    detailedDescription:
+      "CA Insight is an open-source Python tool by Emilien Socchi that takes an identity-centric approach to Conditional Access gap detection. Instead of reactively scanning sign-in logs (which only shows gaps already exploited), it retrieves your CA policies via the MS Graph API and then generates and evaluates all possible access combinations offline — covering identity type, application, platform, location, client type, and auth flow. A 'gap' is any combination where no policy enforces MFA, Authentication Strength, or Block. It supports all identity types: member users, guests, external users, workload identities, and agent identities. Results are available via a CLI for automation/CI-CD or an interactive web portal with dashboards, scan history, and policy browser.",
+    quickGuide:
+      "Requires Python and an Entra app registration with read-only Graph API permissions (see the wiki Installation page for the exact permissions list). Clone the repo, install dependencies from requirements.txt, then run a scan via the CLI or start the web portal for interactive exploration. Scans are read-only and never modify policies or settings. Use identity filters and resource scoping to focus on specific users or applications.",
+    bestFor: [
+      "Proactively finding Conditional Access gaps before they appear in sign-in logs",
+      "Validating that all identity types (users, guests, workload identities) are covered by CA policies",
+      "Tracking CA coverage trends over time with scan history and comparison",
+      "Root-cause analysis of CA misconfigurations using the centralized policy browser",
+    ],
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/emiliensocchi/entra-ca-insight",
+      },
+      {
+        label: "Wiki (Install & Usage)",
+        url: "https://github.com/emiliensocchi/entra-ca-insight/wiki",
+      },
+    ],
+  },
+  {
+    id: "aztier",
+    name: "AzTier",
+    sourceType: "personal",
+    description:
+      "Browse Azure, Entra, and MS Graph administrative assets categorized into security tiers based on known attack paths.",
+    tags: [
+      "Azure",
+      "Entra ID",
+      "Security",
+      "RBAC",
+      "Tiering",
+      "Reference",
+      "Web Tool",
+    ],
+    detailedDescription:
+      "AzTier (Azure Administrative Tiering) is a web-based reference tool by Emilien Socchi that classifies Azure RBAC roles, Entra ID roles, and Microsoft Graph application permissions into security tiers (Tier 0 through Tier 3) based on known attack paths. Tier 0 represents the highest-privilege assets that can lead to full tenant compromise, while higher tiers represent progressively lower risk. The tool helps teams implement administrative tiering models by providing a clear, filterable view of which roles belong to which tier — essential for designing Privileged Access Management strategies, scoping PIM assignments, and reviewing role assignments for excessive privileges.",
+    quickGuide:
+      "Visit aztier.com and select a category: Azure Roles, Entra Roles, or MS Graph Application Permissions. Use the tier filter buttons (Tier 0–3) to narrow down the list. Each role links directly to Microsoft's official documentation. Use this as a reference when designing tiered admin models, reviewing PIM eligible assignments, or auditing which roles should be considered high-privilege.",
+    bestFor: [
+      "Designing and implementing administrative tiering models for Azure and Entra",
+      "Identifying which RBAC and Entra roles are Tier 0 (highest privilege) during security reviews",
+      "Scoping Privileged Identity Management (PIM) policies based on role tier classification",
+      "Auditing MS Graph application permissions for excessive privilege in app registrations",
+    ],
+    links: [
+      {
+        label: "AzTier",
+        url: "https://aztier.com/",
+      },
+      {
+        label: "Azure Roles",
+        url: "https://aztier.com/#azure",
+      },
+      {
+        label: "Entra Roles",
+        url: "https://aztier.com/#entra",
+      },
+      {
+        label: "MS Graph Permissions",
+        url: "https://aztier.com/#msgraph",
       },
     ],
   },

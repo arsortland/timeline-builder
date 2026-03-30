@@ -1,14 +1,16 @@
 // Created: 2026-03-26
 // Updated: 2026-03-30
-// Version: v3.0
+// Version: v4.0
 // Description: Sidebar navigation component with theme toggle
 // Purpose: Collapsible sidebar with branding, route-based navigation (Home, Timeline, Toolbox),
 //          and a dark/light mode toggle at the bottom.
 //          v3.0: Replaced hardcoded navItems with Next.js Link + usePathname for active state.
+//          v4.0: Replaced TE text branding with custom team logo (teamentralogoNOBG.png).
 
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Home,
@@ -55,12 +57,14 @@ export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
       >
         {!collapsed && (
           <div className="flex items-center gap-2 overflow-hidden">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0"
-              style={{ background: "var(--accent)" }}
-            >
-              TE
-            </div>
+            <Image
+              src="/teamentralogoNOBG.png"
+              alt="Team Entra Norway logo"
+              width={32}
+              height={32}
+              className="shrink-0 rounded-lg"
+              unoptimized
+            />
             <div className="truncate">
               <p
                 className="text-sm font-bold"
@@ -75,12 +79,14 @@ export default function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
           </div>
         )}
         {collapsed && (
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold mx-auto"
-            style={{ background: "var(--accent)" }}
-          >
-            TE
-          </div>
+          <Image
+            src="/teamentralogoNOBG.png"
+            alt="Team Entra Norway logo"
+            width={32}
+            height={32}
+            className="rounded-lg mx-auto"
+            unoptimized
+          />
         )}
         {!collapsed && (
           <button
