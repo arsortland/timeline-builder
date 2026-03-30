@@ -128,6 +128,15 @@ export default function Home() {
 
       {/* ── Hero section (full viewport) ── */}
       <section className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-6 lg:px-8 py-16">
+        <Image
+          src="/Atea logo.png"
+          alt="Atea logo"
+          width={120}
+          height={40}
+          unoptimized
+          priority
+          className="mb-4"
+        />
         <div className="mb-6">
           <Image
             src="/teamentralogoNOBG.png"
@@ -159,7 +168,7 @@ export default function Home() {
         >
           We are the Identity &amp; Access Management team responsible for
           Microsoft Entra ID, Azure security, and Microsoft 365 governance
-          across the organisation. This portal is our shared hub for tools,
+          in Atea Norway. This portal is our shared hub for tools,
           project timelines, and reference material.
         </p>
 
