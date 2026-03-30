@@ -224,20 +224,38 @@ body {
 
 /* Slow idle bobbing for floating shapes */
 @keyframes float-drift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
 }
 
 /* Content sections fading in from below */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Scroll-down indicator bounce */
 @keyframes bounce-subtle {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(6px); opacity: 1; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
 }
 
 /* Base class for parallax shapes — pointer-events none so they don't block clicks */
@@ -252,7 +270,9 @@ body {
 .fade-section {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
 }
 .fade-section.is-visible {
   opacity: 1;

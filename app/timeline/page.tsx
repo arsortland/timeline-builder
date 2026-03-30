@@ -29,6 +29,7 @@ import {
 } from "../lib/exportUtils";
 
 const TIMELINE_STYLE_KEY = "timeline-style";
+const TIMELINE_COLOR_KEY = "timeline-line-color";
 
 export default function TimelinePage() {
   const [timelineData, setTimelineData] = useState<TimelineData>(
@@ -38,6 +39,7 @@ export default function TimelinePage() {
   const [shareableLink, setShareableLink] = useState("");
   const [lastSaved, setLastSaved] = useState<string>("");
   const [timelineStyle, setTimelineStyle] = useState<TimelineStyle>("classic");
+  const [timelineColor, setTimelineColor] = useState<string>("");
   const timelineElementRef = useRef<HTMLElement | null>(null);
 
   // Load timeline style preference
@@ -45,6 +47,10 @@ export default function TimelinePage() {
     const storedStyle = localStorage.getItem(TIMELINE_STYLE_KEY);
     if (storedStyle === "classic" || storedStyle === "project") {
       setTimelineStyle(storedStyle);
+    }
+    const storedColor = localStorage.getItem(TIMELINE_COLOR_KEY);
+    if (storedColor) {
+      setTimelineColor(storedColor);
     }
   }, []);
 
@@ -160,6 +166,11 @@ export default function TimelinePage() {
     localStorage.setItem(TIMELINE_STYLE_KEY, style);
   };
 
+  const handleTimelineColorChange = (color: string) => {
+    setTimelineColor(color);
+    localStorage.setItem(TIMELINE_COLOR_KEY, color);
+  };
+
   return (
     <>
       <TopBar
@@ -171,39 +182,80 @@ export default function TimelinePage() {
         lastSaved={lastSaved || undefined}
       />
 
-      <main className="flex-1 overflow-y-auto px-6 lg:px-8 py-8 space-y-8">
-        {/* Timeline Style Tabs */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => handleStyleChange("classic")}
-            className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
-            style={{
-              background:
-                timelineStyle === "classic"
-                  ? "var(--accent)"
-                  : "var(--surface)",
-              color:
-                timelineStyle === "classic" ? "#fff" : "var(--text-secondary)",
-              border: `1px solid ${timelineStyle === "classic" ? "var(--accent)" : "var(--border)"}`,
-            }}
-          >
-            Classic
-          </button>
-          <button
-            onClick={() => handleStyleChange("project")}
-            className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
-            style={{
-              background:
-                timelineStyle === "project"
-                  ? "var(--accent)"
-                  : "var(--surface)",
-              color:
-                timelineStyle === "project" ? "#fff" : "var(--text-secondary)",
-              border: `1px solid ${timelineStyle === "project" ? "var(--accent)" : "var(--border)"}`,
-            }}
-          >
-            Project
-          </button>
+      <main
+        className="flex-1 overflow-y-auto px-6 lg:px-8 py-8 space-y-8"
+        style={
+          timelineColor
+            ? ({ "--timeline-line": timelineColor } as React.CSSProperties)
+            : undefined
+        }
+      >
+        {/* Timeline Style Tabs + Line Color */}
+        <div className="flex items-center gap-4">
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleStyleChange("classic")}
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              style={{
+                background:
+                  timelineStyle === "classic"
+                    ? "var(--accent)"
+                    : "var(--surface)",
+                color:
+                  timelineStyle === "classic"
+                    ? "#fff"
+                    : "var(--text-secondary)",
+                border: `1px solid ${timelineStyle === "classic" ? "var(--accent)" : "var(--border)"}`,
+              }}
+            >
+              Classic
+            </button>
+            <button
+              onClick={() => handleStyleChange("project")}
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              style={{
+                background:
+                  timelineStyle === "project"
+                    ? "var(--accent)"
+                    : "var(--surface)",
+                color:
+                  timelineStyle === "project"
+                    ? "#fff"
+                    : "var(--text-secondary)",
+                border: `1px solid ${timelineStyle === "project" ? "var(--accent)" : "var(--border)"}`,
+              }}
+            >
+              Project
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <label
+              className="text-sm font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Line color
+            </label>
+            <input
+              type="color"
+              value={timelineColor || "#d97706"}
+              onChange={(e) => handleTimelineColorChange(e.target.value)}
+              className="w-9 h-9 rounded cursor-pointer"
+              style={{ border: "1px solid var(--border)" }}
+            />
+            {timelineColor && (
+              <button
+                onClick={() => handleTimelineColorChange("")}
+                className="text-xs px-2 py-1 rounded transition-colors"
+                style={{
+                  color: "var(--text-muted)",
+                  background: "var(--surface-hover)",
+                }}
+              >
+                Reset
+              </button>
+            )}
+          </div>
         </div>
 
         {timelineStyle === "classic" ? (
@@ -221,6 +273,7 @@ export default function TimelinePage() {
         <DataTable
           milestones={timelineData.milestones}
           onChange={handleMilestonesChange}
+          timelineStyle={timelineStyle}
         />
 
         {/* Footer */}

@@ -1,10 +1,11 @@
 // Created: 2026-02-20
-// Updated: 2026-03-27
-// Version: v4.0
+// Updated: 2026-03-30
+// Version: v5.0
 // Description: DataTable component for milestone data entry
 // Purpose: Provides an editable table interface for creating and managing timeline milestones
 // v3.0: Theme-aware dark/light mode styling via CSS variables.
 // v4.0: Added #, Title, and Icon columns for project-style timeline support.
+// v5.0: Fixed swapped Icon/Position cells. Hide #, Title, Icon in classic mode.
 
 "use client";
 
@@ -13,7 +14,11 @@ import { DataTableProps, Milestone } from "../lib/types";
 import { createEmptyMilestone } from "../lib/timelineUtils";
 import IconPicker from "./IconPicker";
 
-export default function DataTable({ milestones, onChange }: DataTableProps) {
+export default function DataTable({
+  milestones,
+  onChange,
+  timelineStyle,
+}: DataTableProps) {
   const handleAdd = () => {
     const newMilestone = createEmptyMilestone(milestones);
     onChange([...milestones, newMilestone]);
@@ -118,13 +123,19 @@ export default function DataTable({ milestones, onChange }: DataTableProps) {
               >
                 <th
                   className="px-4 py-3 text-left text-sm font-bold w-16"
-                  style={{ color: "var(--text-primary)" }}
+                  style={{
+                    color: "var(--text-primary)",
+                    display: timelineStyle === "classic" ? "none" : undefined,
+                  }}
                 >
                   #
                 </th>
                 <th
                   className="px-4 py-3 text-left text-sm font-bold"
-                  style={{ color: "var(--text-primary)" }}
+                  style={{
+                    color: "var(--text-primary)",
+                    display: timelineStyle === "classic" ? "none" : undefined,
+                  }}
                 >
                   Title
                 </th>
@@ -144,13 +155,16 @@ export default function DataTable({ milestones, onChange }: DataTableProps) {
                   className="px-4 py-3 text-left text-sm font-bold"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  Icon
+                  Position
                 </th>
                 <th
                   className="px-4 py-3 text-left text-sm font-bold"
-                  style={{ color: "var(--text-primary)" }}
+                  style={{
+                    color: "var(--text-primary)",
+                    display: timelineStyle === "classic" ? "none" : undefined,
+                  }}
                 >
-                  Position
+                  Icon
                 </th>
                 <th
                   className="px-4 py-3 text-left text-sm font-bold"
@@ -179,7 +193,12 @@ export default function DataTable({ milestones, onChange }: DataTableProps) {
                     (e.currentTarget.style.background = "transparent")
                   }
                 >
-                  <td className="px-4 py-3">
+                  <td
+                    className="px-4 py-3"
+                    style={{
+                      display: timelineStyle === "classic" ? "none" : undefined,
+                    }}
+                  >
                     <input
                       type="number"
                       value={milestone.number ?? index + 1}
@@ -207,7 +226,12 @@ export default function DataTable({ milestones, onChange }: DataTableProps) {
                       }
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td
+                    className="px-4 py-3"
+                    style={{
+                      display: timelineStyle === "classic" ? "none" : undefined,
+                    }}
+                  >
                     <input
                       type="text"
                       value={milestone.title ?? ""}
@@ -315,7 +339,12 @@ export default function DataTable({ milestones, onChange }: DataTableProps) {
                       title="Positive = above, Negative = below"
                     />
                   </td>
-                  <td className="px-4 py-3">
+                  <td
+                    className="px-4 py-3"
+                    style={{
+                      display: timelineStyle === "classic" ? "none" : undefined,
+                    }}
+                  >
                     <IconPicker
                       value={milestone.icon}
                       onChange={(iconName) =>

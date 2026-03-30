@@ -38,21 +38,96 @@ interface Shape {
 }
 
 const SHAPES: Shape[] = [
-  { top: "5%",  left: "8%",  size: 140, borderRadius: "50%",  speed: 0.12, opacity: 0.07, delay: "0s" },
-  { top: "15%", left: "75%", size: 90,  borderRadius: "30%",  speed: 0.25, opacity: 0.09, delay: "1s", ring: true },
-  { top: "35%", left: "85%", size: 180, borderRadius: "50%",  speed: 0.08, opacity: 0.05, delay: "2s" },
-  { top: "50%", left: "5%",  size: 60,  borderRadius: "50%",  speed: 0.35, opacity: 0.12, delay: "0.5s", ring: true },
-  { top: "60%", left: "55%", size: 110, borderRadius: "25%",  speed: 0.18, opacity: 0.06, delay: "3s" },
-  { top: "75%", left: "20%", size: 200, borderRadius: "50%",  speed: 0.06, opacity: 0.04, delay: "1.5s" },
-  { top: "85%", left: "70%", size: 70,  borderRadius: "50%",  speed: 0.3,  opacity: 0.1,  delay: "2.5s", ring: true },
+  {
+    top: "5%",
+    left: "8%",
+    size: 140,
+    borderRadius: "50%",
+    speed: 0.12,
+    opacity: 0.07,
+    delay: "0s",
+  },
+  {
+    top: "15%",
+    left: "75%",
+    size: 90,
+    borderRadius: "30%",
+    speed: 0.25,
+    opacity: 0.09,
+    delay: "1s",
+    ring: true,
+  },
+  {
+    top: "35%",
+    left: "85%",
+    size: 180,
+    borderRadius: "50%",
+    speed: 0.08,
+    opacity: 0.05,
+    delay: "2s",
+  },
+  {
+    top: "50%",
+    left: "5%",
+    size: 60,
+    borderRadius: "50%",
+    speed: 0.35,
+    opacity: 0.12,
+    delay: "0.5s",
+    ring: true,
+  },
+  {
+    top: "60%",
+    left: "55%",
+    size: 110,
+    borderRadius: "25%",
+    speed: 0.18,
+    opacity: 0.06,
+    delay: "3s",
+  },
+  {
+    top: "75%",
+    left: "20%",
+    size: 200,
+    borderRadius: "50%",
+    speed: 0.06,
+    opacity: 0.04,
+    delay: "1.5s",
+  },
+  {
+    top: "85%",
+    left: "70%",
+    size: 70,
+    borderRadius: "50%",
+    speed: 0.3,
+    opacity: 0.1,
+    delay: "2.5s",
+    ring: true,
+  },
 ];
 
 /* ── Stats data ───────────────────────────────────────────── */
 const STATS = [
-  { icon: <Wrench className="w-5 h-5" />,        label: "14+ Tools",             sub: "Curated toolbox" },
-  { icon: <Fingerprint className="w-5 h-5" />,    label: "Identity Governance",   sub: "Entra ID & PIM" },
-  { icon: <ShieldCheck className="w-5 h-5" />,    label: "Zero Trust",            sub: "Security posture" },
-  { icon: <Cloud className="w-5 h-5" />,          label: "Microsoft Cloud",       sub: "Azure & M365" },
+  {
+    icon: <Wrench className="w-5 h-5" />,
+    label: "14+ Tools",
+    sub: "Curated toolbox",
+  },
+  {
+    icon: <Fingerprint className="w-5 h-5" />,
+    label: "Identity Governance",
+    sub: "Entra ID & PIM",
+  },
+  {
+    icon: <ShieldCheck className="w-5 h-5" />,
+    label: "Zero Trust",
+    sub: "Security posture",
+  },
+  {
+    icon: <Cloud className="w-5 h-5" />,
+    label: "Microsoft Cloud",
+    sub: "Azure & M365",
+  },
 ];
 
 /* ── useInView hook (IntersectionObserver) ────────────────── */
@@ -103,7 +178,10 @@ export default function Home() {
       style={{ background: "var(--background)" }}
     >
       {/* ── Floating parallax shapes ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
         {SHAPES.map((s, i) => (
           <div
             key={i}
@@ -119,7 +197,10 @@ export default function Home() {
               animationDuration: `${6 + i * 0.8}s`,
               transform: `translateY(${scrollY * -s.speed}px)`,
               ...(s.ring
-                ? { border: "2px solid var(--accent)", background: "transparent" }
+                ? {
+                    border: "2px solid var(--accent)",
+                    background: "transparent",
+                  }
                 : { background: "var(--accent)" }),
             }}
           />
@@ -167,13 +248,16 @@ export default function Home() {
           style={{ color: "var(--text-secondary)" }}
         >
           We are the Identity &amp; Access Management team responsible for
-          Microsoft Entra ID, Azure security, and Microsoft 365 governance
-          in Atea Norway. This portal is our shared hub for tools,
-          project timelines, and reference material.
+          Microsoft Entra ID, Azure security, and Microsoft 365 governance in
+          Atea Norway. This portal is our shared hub for tools, project
+          timelines, and reference material.
         </p>
 
         {/* Scroll indicator */}
-        <div className="scroll-indicator mt-12" style={{ color: "var(--text-muted)" }}>
+        <div
+          className="scroll-indicator mt-12"
+          style={{ color: "var(--text-muted)" }}
+        >
           <ChevronDown className="w-6 h-6" />
         </div>
       </section>
@@ -183,9 +267,7 @@ export default function Home() {
         ref={statsRef as React.RefObject<HTMLElement>}
         className="fade-section relative px-6 lg:px-8 py-8"
       >
-        <div
-          className="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4"
-        >
+        <div className="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
           {STATS.map((stat) => (
             <div
               key={stat.label}
@@ -205,7 +287,10 @@ export default function Home() {
                 {stat.icon}
               </div>
               <div>
-                <p className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
+                <p
+                  className="text-sm font-bold"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   {stat.label}
                 </p>
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>

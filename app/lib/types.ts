@@ -36,6 +36,7 @@ export interface TimelineViewerProps {
 export interface DataTableProps {
   milestones: Milestone[];
   onChange: (milestones: Milestone[]) => void;
+  timelineStyle: TimelineStyle;
 }
 
 export interface HeaderProps {

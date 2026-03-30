@@ -144,11 +144,12 @@ export default function IconPicker({
       {/* Popover grid */}
       {open && (
         <div
-          className="absolute z-50 mt-1 p-2 rounded-lg shadow-xl grid grid-cols-6 gap-1"
+          className="absolute z-50 mt-1 p-2 rounded-lg shadow-xl grid grid-cols-6 gap-1 overflow-y-auto"
           style={{
             background: "var(--surface-raised)",
             border: "1px solid var(--border)",
             width: 240,
+            maxHeight: 320,
             right: 0,
           }}
         >
