@@ -1,6 +1,6 @@
 // Created: 2026-03-30
 // Updated: 2026-03-30
-// Version: v1.3 - Added idPowerToys (CA Documenter + Entra Mind Map) as tool #15
+// Version: v1.4 - Added Entra RoleLens (least-privileged role finder) as tool #16
 // Description: Tool definitions for the Toolbox page
 // Purpose: Provides an array of tools used by the Entra / Microsoft cloud team,
 //          each with name, sourceType, description, tags, detailed description, and links.
@@ -435,6 +435,45 @@ export const tools: Tool[] = [
       {
         label: "GitHub",
         url: "https://github.com/merill/idPowerToys",
+      },
+    ],
+  },
+  {
+    id: "entra-rolelens",
+    name: "Entra RoleLens",
+    sourceType: "opensource",
+    description:
+      "Find the minimum built-in Entra role for any admin task and compare roles side by side.",
+    tags: [
+      "Entra ID",
+      "RBAC",
+      "Least Privilege",
+      "Security",
+      "Web Tool",
+      "Reference",
+    ],
+    detailedDescription:
+      "Entra RoleLens is a community-built web tool by aboutcloud.io that helps you find the minimum built-in Microsoft Entra role required for any admin task. Type any task in plain language — such as 'reset user MFA' or 'manage conditional access' — and get back the exact least-privileged role needed. It also features a Role Diff mode that lets you select any two built-in roles and see every permission one has that the other lacks, displayed side by side. All results are sourced directly from Microsoft's official 'least privileged by task' documentation and refreshed nightly — no AI, every result is deterministic. The dataset covers 143 roles, 246 tasks, and 13 unlisted roles.",
+    quickGuide:
+      "Navigate to entrarolelens.aboutcloud.io. Use the Task → Role tab: type any Entra admin task in plain language (e.g. 'reset user password', 'manage app registrations') and the tool returns the minimum built-in role required. Click any result to see the full role permissions. Switch to the Role Diff tab to select two roles and compare their permissions side by side.",
+    bestFor: [
+      "Identifying the least-privileged role for any Entra admin task",
+      "Comparing two Entra built-in roles to understand permission differences",
+      "Enforcing least-privilege access during role assignments and access reviews",
+      "Quick reference when designing RBAC models for Entra ID",
+    ],
+    links: [
+      {
+        label: "Entra RoleLens",
+        url: "https://entrarolelens.aboutcloud.io/",
+      },
+      {
+        label: "GitHub",
+        url: "https://github.com/arusso-aboutcloud/entra-rolelens",
+      },
+      {
+        label: "aboutcloud.io",
+        url: "https://aboutcloud.io/",
       },
     ],
   },
